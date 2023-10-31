@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!-- Este es nuestro elemento raiz para la configuracion de hibernate -->
+
+    <class name="edu.ejercicios.PU.EstudiantesClass" table="estudiantes" schema="public" catalog="pruebapo">
+        <!--Esta es la declaracion de la clase "EstudiantesClass" que sera mapeada a la tabla estudiantes de la DB-->
+        <id name="idEstudiante">
+            <column name="id_estudiante" sql-type="integer"/>
+        </id>   <!--Declaracion de la propiedad "id" de la clase EstudiantesClass. La propiedad id es un identificador unico en cada estudiante-->
+        <!--Y se mapeara a la columna id_estudiante en la tabla estudiantes de la DB  -->
+        <property name="nombre"> <!--Declaracion de la propiedad nombre de la clase EstudiantesClass-->
+            <column name="nombre" sql-type="varchar(50)" length="50"/>
+        </property> <!--Y se mapeara a la columna nombre de la tabla estudiantes de la DB  -->
+        <property name="apellido"> <!--Declaracion de la propiedad apellido de la clase EstudiantesClass-->
+            <column name="apellido" sql-type="varchar(50)" length="50"/>
+        </property> <!--Se mapeara a la columna apellido de la tabla estudiantes de la DB   -->
+        <property name="email"> <!--Declaracion de la propiedad email para la clase EstudiantesClass  -->
+            <column name="email" sql-type="varchar(100)" length="100"/>
+        </property> <!--Se mapeara a la columna email de la table estudiantes de la DB  -->
+        <set name="listaInscripcionesidest" inverse="true"> <!--Esta es la declaracion de un conjunto de objetos InscripcionesClass que se asocia a la clase EstudiantesClass-->
+            <key> <!-- Aca haremos la declaracion de la llave primaria de la tabla estudiantes, la cual es la columna "id_estudiante"-->
+                <column name="id_estudiante" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="edu.ejercicios.PU.InscripcionesClass"/>
+            <!--Esa fue la declaracion de la relacion DE UNO A MUCHOS entre la clase EstudiantesClass y la clase InscripcionesClass -->
+            <!--la propiedad listaInscripcionesidest es un conjunto de objetos InscripcionesClass que se asocia con cada estudiante -->
+        </set>
+    </class>
+</hibernate-mapping>
+
+<!--En resumen, este archivo de configuración de Hibernate se utiliza para mapear la clase
+"EstudiantesClass" a la tabla "estudiantes" en la base de datos y definir la relación
+de una a muchos entre la clase "EstudiantesClass" y la clase "InscripcionesClass" -->

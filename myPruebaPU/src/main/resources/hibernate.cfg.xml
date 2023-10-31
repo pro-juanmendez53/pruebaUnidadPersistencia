@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC 
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>  <!-- Elemento raiz para la configuracion de hibernate -->
+
+  <session-factory> <!-- Este elemento se utiliza para configurar la sesión de hibernate -->
+    <!-- Practicamente hibernate lo que genero aca fue el conector a nuestra base de datos de postgres  -->
+    <!-- tenemos la url, el driver, el nombre de usuario y contraseña de nuestra DB -->
+    <property name="connection.url">jdbc:postgresql://localhost:5432/pruebapo</property>
+    <property name="connection.driver_class">org.postgresql.Driver</property>
+    <property name="connection.username">user</property>
+    <property name="connection.password">password</property>
+    <mapping resource="CursosClass.hbm.xml"/>  <!--Esta es una propiedad que se utiliza para mapear la clase "CursosClass" a una tabla de la base de datos-->
+      <mapping resource="EstudiantesClass.hbm.xml"/> <!--Esta es una propiedad que se utiliza para mapear la clase "EstudiantesClass" a una tabla de la base de datos-->
+      <mapping resource="InscripcionesClass.hbm.xml"/> <!--Esta es una propiedad que se utiliza para mapear la clase "InscripcionesClass" a una tabla de la base de datos-->
+      <!-- <property name="connection.username"/> -->
+    <!-- <property name="connection.password"/> -->
+
+    <!-- DB schema will be updated if needed -->
+    <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+  </session-factory>
+    <!-- En resumen, este archivo de configuracion de hibernate se utiliza para configurar la conexion a una base de datos PostgreSQL-->
+    <!-- Y mapear las clase de objetos CursosClass EstudiantesClass InscripcoinesClass a las tablas correspondientes de la DB -->
+    <!-- Ademas se esta configurando para que hibernate actualice la DB si es necesario  -->
+</hibernate-configuration>
+

@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!-- Este es nuestro elemento raiz para la configuracion de hibernate -->
+
+    <class name="edu.ejercicios.PU.CursosClass" table="cursos" schema="public" catalog="pruebapo">
+        <!--Esta es la declaracion de la clase "CursosClass" que sera mapeada a la tabla cursos de la DB-->
+        <id name="idCurso">
+            <column name="id_curso" sql-type="integer"/>
+        </id>   <!--Declaracion de la propiedad "id" de la clase CursosClass. La propiedad id es un identificador unico en cada curso-->
+        <!--Y se mapeara a la columna id_curso en la tabla cursos de la DB  -->
+        <property name="nombreCurso"> <!--Declaracion de la propiedad nombre de la clase CursosClass-->
+            <column name="nombre_curso" sql-type="varchar(50)" length="50"/>
+        </property> <!--Y se mapeara a la columna nombre de la tabla cursos de la DB  -->
+        <property name="profesor"> <!--Declaracion de la propiedad profesor de la clase CursosClass-->
+            <column name="profesor" sql-type="varchar(50)" length="50"/>
+        </property> <!--Y se mapeara a la columna profesor de la tabla cursos de la DB  -->
+        <set name="listaInscripcionesidcur" inverse="true"> <!--Esta es la declaracion de un conjunto de objetos InscripcionesClass que se asocia a la clase CursosClass-->
+            <key> <!-- Aca haremos la declaracion de la llave primaria de la tabla cursos, la cual es la columna "id_curso"-->
+                <column name="id_curso" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="edu.ejercicios.PU.InscripcionesClass"/>
+            <!--Esa fue la declaracion de la relacion DE UNO A MUCHOS entre la clase CursosClass y la clase InscripcionesClass -->
+            <!--la propiedad listaInscripcionesidcur es un conjunto de objetos InscripcionesClass que se asocia con cada estudiante -->
+        </set>
+    </class>
+</hibernate-mapping>
+
+        <!--En resumen, este archivo de configuración de Hibernate se utiliza para mapear la clase
+        "CursosClass" a la tabla "cursos" en la base de datos y definir la relación
+        de una a muchos entre la clase "CursosClass" y la clase "InscripcionesClass" -->

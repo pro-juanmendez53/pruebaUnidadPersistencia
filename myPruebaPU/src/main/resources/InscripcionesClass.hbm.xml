@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>  <!-- Este es nuestro elemento raiz para la configuracion de hibernate -->
+
+    <class name="edu.ejercicios.PU.InscripcionesClass" table="inscripciones" schema="public" catalog="pruebapo">
+        <!--Esta es la declaracion de la clase "InscripcionesClass" que sera mapeada a la tabla inscripciones de la DB-->
+        <id name="idInscripcion">
+            <column name="id_inscripcion" sql-type="integer"/>
+        </id> <!--Declaracion de la propiedad "id" de la clase InscripcionesClass. La propiedad id es un identificador unico de cada inscripcion-->
+        <!--Y se mapeara a la columna id_inscripcion en la tabla inscripcioines de la DB  -->
+        <property name="idEstudiante"> <!--Declaracion de la propiedad idEstudiante de la clase InscripcionesClass-->
+            <column name="id_estudiante" sql-type="integer" not-null="true"/>
+        </property>  <!--Y se mapeara a la columna id_estudiante de la tabla inscripciones de la DB  -->
+        <property name="idCurso"> <!--Declaracion de la propiedad idCurso de la clase InscripcionesClass-->
+            <column name="id_curso" sql-type="integer" not-null="true"/>
+        </property> <!--Y se mapeara a la columna id_curso de la tabla inscripciones de la DB  -->
+        <property name="fechaInscripcion"> <!--Declaracion de la propiedad fechaInscripcion de la clase InscripcionesClass-->
+            <column name="fecha_inscripcion" sql-type="date"/>
+        </property> <!--Y se mapeara a la columna fecha_inscripcion de la tabla inscripciones de la DB  -->
+        <many-to-one name="listaEstudiantesidest" class="edu.ejercicios.PU.EstudiantesClass">
+            <!--Esta es la declaración de la relación de una a muchos entre la clase InscripcionesClass
+            y la clase EstudiantesClass. La propiedad listaEstudiantesidest es un conjunto de objetos
+            EstudiantesClass que se asocia con cada inscripción -->
+            <column name="id_estudiante" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="listaCursosidcur" class="edu.ejercicios.PU.CursosClass">
+            <!-- Esta es la declaración de la relación de una a muchos entre la clase InscripcionesClass
+            y la clase CursosClass. La propiedad listaCursosidcur es un conjunto de objetos CursosClass que se asocia con cada inscripción -->
+            <column name="id_curso" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>
+
+<!-- En resumen, este archivo de configuración de Hibernate se utiliza para mapear la clase
+InscripcionesClass a la tabla inscripciones en la base de datos y definir las relaciones
+de una a muchos entre la clase InscripcionesClass y las clases EstudiantesClass y CursosClass. -->
